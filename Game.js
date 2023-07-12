@@ -1,5 +1,6 @@
 class Example extends Phaser.Scene
 {
+    // Test
     constructor ()
     {
         super();
