@@ -8,29 +8,20 @@ class Example extends Phaser.Scene
 
     preload ()
     {
-        this.load.setBaseURL('https://labs.phaser.io');
-
-        this.load.image('sky', 'assets/skies/space3.png');
-        this.load.image('logo', 'assets/sprites/phaser3-logo.png');
-        this.load.image('red', 'assets/particles/red.png');
     }
 
     create () {
-        this.add.image(400, 300, 'sky');
+       var graphics = this.add.graphics();
+       graphics.fillStyle(0xff0000)
+       graphics.lineStyle(2, 0x000000) // 2px thick
 
-        const particles = this.add.particles(0, 0, 'red', {
-            speed: 100,
-            scale: { start: 1, end: 0 },
-            blendMode: 'ADD'
-        });
+       var squareSize = 50;
+       var x = game.config.width / 2 - squareSize / 2;
+       var y = game.config.height / 2 - squareSize / 2;
+       graphics.fillRect(x, y, squareSize, squareSize)
 
-        const logo = this.physics.add.image(400, 100, 'logo');
-
-        logo.setVelocity(100, 200);
-        logo.setBounce(1, 1);
-        logo.setCollideWorldBounds(true);
-
-        particles.startFollow(logo);
+       graphics.fillStyle(0x00ff00)
+       graphics.fillRect(x + squareSize + 50, y + squareSize + 50, squareSize, squareSize);
     }
 }
 
@@ -38,12 +29,12 @@ const config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 200 }
-        }
-    },
+    // physics: {
+    //     default: 'arcade',
+    //     arcade: {
+    //         gravity: { y: 200 }
+    //     }
+    // },
     scene: Example
 };
 
